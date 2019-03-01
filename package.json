@@ -9,6 +9,22 @@
   },
   "author": "Sun",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ufologist/qsman.git"
+  },
+  "keywords": [
+    "query",
+    "string",
+    "querystring",
+    "qs",
+    "stringify",
+    "parse"
+  ],
+  "bugs": {
+    "url": "https://github.com/ufologist/qsman/issues"
+  },
+  "homepage": "https://github.com/ufologist/qsman#readme",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.3.4",
