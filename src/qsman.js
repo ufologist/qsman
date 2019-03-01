@@ -1,4 +1,9 @@
-var util = require('./util.js');
+import {
+    getUrlQueryString,
+    parseQueryString,
+    stripUrlQueryString,
+    getUrlHash
+} from './util.js';
 
 /**
  * 解析和维护 URL 上的参数
@@ -11,7 +16,7 @@ var util = require('./util.js');
 function QsMan(url) {
     this._url = url || '';
     // 解析 URL 已有的 querystring
-    this._queryStringKvs = util.parseQueryString(util.getUrlQueryString(this._url));
+    this._queryStringKvs = parseQueryString(getUrlQueryString(this._url));
 }
 
 /**
@@ -21,7 +26,7 @@ function QsMan(url) {
  * @return {object} this
  */
 QsMan.prototype.append = function(queryString) {
-    var queryStringKvs = util.parseQueryString(queryString);
+    var queryStringKvs = parseQueryString(queryString);
     this._queryStringKvs = this._queryStringKvs.concat(queryStringKvs);
     return this;
 };
@@ -62,7 +67,7 @@ QsMan.prototype.set = function(name, value) {
     kvMap[name] = value;
 
     // 解析出 value 值
-    var valueQueryStringKvs = util.parseQueryString(kvMap);
+    var valueQueryStringKvs = parseQueryString(kvMap);
 
     var found = this._queryStringKvs.filter(function(kv) {
         return kv.key === name;
@@ -188,11 +193,11 @@ QsMan.prototype.toString = function(includeUndefinedValue) {
     }).join('&');
 
     // 重组 URL
-    url = util.stripUrlQueryString(this._url);
+    url = stripUrlQueryString(this._url);
     if (queryString) {
         url = url + '?' + queryString;
     }
-    var hash = util.getUrlHash(this._url);
+    var hash = getUrlHash(this._url);
     if (hash) {
         url = url + '#' + hash;
     }
@@ -207,7 +212,7 @@ QsMan.prototype.toString = function(includeUndefinedValue) {
  * @return {object} this
  */
 QsMan.prototype.replace = function(queryString) {
-    var queryStringKvs = util.parseQueryString(queryString);
+    var queryStringKvs = parseQueryString(queryString);
     for (var i = 0, length = queryStringKvs.length; i < length; i++) {
         this.delete(queryStringKvs[i].key);
     }
@@ -240,4 +245,4 @@ QsMan.prototype.getObject = function() {
     }, {});
 };
 
-module.exports = QsMan;
+export default QsMan;

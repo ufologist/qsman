@@ -1,4 +1,6 @@
-var stripUrlQueryString = require('../src/util.js').stripUrlQueryString;
+import {
+    stripUrlQueryString
+} from '../src/util.js';
 
 test('URL 上没有参数', function() {
     var url = stripUrlQueryString('http://domain.com');

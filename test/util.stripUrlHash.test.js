@@ -1,4 +1,6 @@
-var stripUrlHash = require('../src/util.js').stripUrlHash;
+import {
+    stripUrlHash
+} from '../src/util.js';
 
 test('URL 上没有 hash', function() {
     var url = stripUrlHash('http://domain.com');

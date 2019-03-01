@@ -1,4 +1,6 @@
-var getUrlQueryString = require('../src/util.js').getUrlQueryString;
+import {
+    getUrlQueryString
+} from '../src/util.js';
 
 test('URL 上没有参数', function() {
     var querystring = getUrlQueryString('http://domain.com');

@@ -1,4 +1,6 @@
-var getUrlHash = require('../src/util.js').getUrlHash;
+import {
+    getUrlHash
+} from '../src/util.js';
 
 test('URL 上没有 hash', function() {
     var hash = getUrlHash('http://domain.com');

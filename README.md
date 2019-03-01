@@ -39,3 +39,11 @@ console.log(url);
 ## APIDoc
 
 [ESDoc](https://doc.esdoc.org/github.com/ufologist/qsman/)
+
+## 为什么造轮子
+
+找了很多库都只能一次性解析 query string, 不能方便地维护 query string, 也不能方便地将 query string 再追加到 URL 上
+
+例如
+* [querystringify](https://www.npmjs.com/package/querystringify)
+* [qs](https://www.npmjs.com/package/qs)

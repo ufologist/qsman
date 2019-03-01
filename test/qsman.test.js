@@ -1,4 +1,4 @@
-var QsMan = require('../src/qsman.js');
+import QsMan from '../src/qsman.js';
 
 describe('constructor', function() {
     test('不传 URL', function() {

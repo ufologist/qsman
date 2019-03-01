@@ -24,7 +24,7 @@ function stringifyObjectValue(value) {
  * @param {string} url 
  * @return {string} 第一个问号之前的 URL(不包括第一个问号)
  */
-function stripUrlQueryString(url) {
+export function stripUrlQueryString(url) {
     var _url = stripUrlHash(url);
     var questionMarkIndex = _url.indexOf('?');
     return _url.substring(0, questionMarkIndex != -1 ? questionMarkIndex : _url.length);
@@ -36,7 +36,7 @@ function stripUrlQueryString(url) {
  * @param {string} url 
  * @return {string} 第一个井号之前的 URL(不包括第一个井号)
  */
-function stripUrlHash(url) {
+export function stripUrlHash(url) {
     var hashIndex = url.indexOf('#');
     return url.substring(0, hashIndex !== -1 ? hashIndex : url.length);
 }
@@ -47,7 +47,7 @@ function stripUrlHash(url) {
  * @param {string} url 
  * @return {string}
  */
-function getUrlQueryString(url) {
+export function getUrlQueryString(url) {
     var _url = stripUrlHash(url);
     var questionMarkIndex = _url.indexOf('?');
     return questionMarkIndex !== -1 ? _url.substring(questionMarkIndex + 1) : '';
@@ -59,7 +59,7 @@ function getUrlQueryString(url) {
  * @param {string} url 
  * @return {string}
  */
-function getUrlHash(url) {
+export function getUrlHash(url) {
     var hashIndex = url.indexOf('#');
     return hashIndex !== -1 ? url.substring(hashIndex + 1) : '';
 }
@@ -77,7 +77,7 @@ function getUrlHash(url) {
  *     value: 'value2'
  * }]
  */
-function parseQueryString(queryString) {
+export function parseQueryString(queryString) {
     var kvs = [];
 
     if (!queryString) {
@@ -132,11 +132,3 @@ function parseQueryString(queryString) {
 
     return kvs;
 }
-
-module.exports = {
-    stripUrlQueryString: stripUrlQueryString,
-    stripUrlHash: stripUrlHash,
-    getUrlQueryString: getUrlQueryString,
-    getUrlHash: getUrlHash,
-    parseQueryString: parseQueryString
-};

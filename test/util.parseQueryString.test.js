@@ -1,4 +1,6 @@
-var parseQueryString = require('../src/util.js').parseQueryString;
+import {
+    parseQueryString
+} from '../src/util.js';
 
 test('没有参数', function() {
     var querystring = parseQueryString('');

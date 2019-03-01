@@ -2,16 +2,21 @@
   "name": "qsman",
   "version": "0.0.1",
   "description": "query string maintainer",
-  "main": "src/qsman.js",
+  "main": "dist/qsman.js",
   "scripts": {
+    "start": "rollup -c",
     "test": "jest"
   },
   "author": "Sun",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "babel-jest": "^24.1.0",
+    "babel-preset-env": "^1.7.0",
     "coveralls": "^3.0.3",
-    "jest": "^24.1.0"
+    "jest": "^24.1.0",
+    "rollup": "^1.3.3",
+    "rollup-plugin-uglify": "^6.0.2"
   },
   "jest": {
     "collectCoverage": true,
