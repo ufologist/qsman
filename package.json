@@ -1,0 +1,22 @@
+{
+  "name": "qsman",
+  "version": "0.0.1",
+  "description": "query string maintainer",
+  "main": "src/qsman.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Sun",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^24.1.0"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "text",
+      "lcov"
+    ]
+  }
+}
