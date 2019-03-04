@@ -19,6 +19,7 @@ class QsMan {
         // 解析 URL 已有的 querystring
         this._queryStringKvs = parseQueryString(getUrlQueryString(this._url));
     }
+
     /**
      * 追加 URL 参数
      *
@@ -30,6 +31,7 @@ class QsMan {
         this._queryStringKvs = this._queryStringKvs.concat(queryStringKvs);
         return this;
     }
+
     /**
      * 获取找到的第一个参数值
      *
@@ -52,6 +54,7 @@ class QsMan {
             return kv.value;
         });
     }
+
     /**
      * 设置参数值
      *
@@ -73,6 +76,7 @@ class QsMan {
             // 记录要设置的参数的位置
             var kvIndex = this._queryStringKvs.indexOf(found[0]);
 
+            // 先删除再插入
             this.delete(name);
             // 在追加的位置切一刀(将需要替换的元素排除掉)
             var left = this._queryStringKvs.slice(0, kvIndex);
@@ -83,12 +87,13 @@ class QsMan {
                 left.push(valueQueryStringKvs[i]);
             }
 
-            this._queryStringKvs = [].concat(left, right);
+            this._queryStringKvs = left.concat(right);
         } else {
             this.append(kvMap);
         }
         return this;
     }
+
     /**
      * 是否有某个参数
      *
@@ -100,19 +105,7 @@ class QsMan {
             return kv.key === name;
         }).length > 0;
     }
-    /**
-     * 获取所有参数的名称
-     *
-     * @return {Array<string>}
-     */
-    keys() {
-        return this._queryStringKvs.reduce(function(keys, kv) {
-            if (keys.indexOf(kv.key) === -1) {
-                keys.push(kv.key);
-            }
-            return keys;
-        }, []);
-    }
+
     /**
      * 删除某个参数
      *
@@ -129,6 +122,21 @@ class QsMan {
         });
         return this;
     }
+
+    /**
+     * 获取所有参数的名称
+     *
+     * @return {Array<string>}
+     */
+    keys() {
+        return this._queryStringKvs.reduce(function(keys, kv) {
+            if (keys.indexOf(kv.key) === -1) {
+                keys.push(kv.key);
+            }
+            return keys;
+        }, []);
+    }
+
     /**
      * 对参数进行升序排序
      *
@@ -150,6 +158,7 @@ class QsMan {
         });
         return this;
     }
+
     /**
      * 拼装 URL
      *
@@ -190,6 +199,7 @@ class QsMan {
 
         return url;
     }
+
     /**
      * 替换 URL 参数
      *
@@ -204,6 +214,7 @@ class QsMan {
         this.append(queryString);
         return this;
     }
+
     /**
      * 获取参数对象
      *
