@@ -8,7 +8,7 @@ import {
 /**
  * 解析和维护 URL 上的参数, 接口设计参考 `URLSearchParams`
  *
- * @see [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams)
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
  */
 class QsMan {
     /**
