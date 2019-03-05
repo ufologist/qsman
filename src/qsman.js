@@ -221,19 +221,22 @@ class QsMan {
      * @return {object} 返回包含了所有参数的对象, 例如: `{key1: 'value1', key2: 'value2', key3: ['value3', 'value4']}`
      */
     getObject() {
-        return this._queryStringKvs.reduce(function(kvMap, kv) {
-            var item = kvMap[kv.key];
-            if (typeof item === 'undefined') {
-                kvMap[kv.key] = kv.value;
-            } else { // 找到多个
-                if (Object.prototype.toString.apply(item) === '[object Array]') {
-                    item.push(kv.value);
-                    kvMap[kv.key] = item;
+        return this._queryStringKvs.reduce(function(object, kv) {
+            var key = kv.key;
+            var value = kv.value;
+
+            var objectValue = object[key];
+            if (typeof objectValue === 'undefined') {
+                object[key] = value;
+            } else {
+                if (Object.prototype.toString.apply(objectValue) === '[object Array]') { // 找到多个
+                    objectValue.push(value);
                 } else {
-                    kvMap[kv.key] = [item, kv.value];
+                    object[key] = [objectValue, value];
                 }
             }
-            return kvMap;
+
+            return object;
         }, {});
     }
 }
