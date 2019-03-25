@@ -22,9 +22,7 @@
 ## Example
 
 ```javascript
-import {
-    QsMan
-} from 'qsman';
+import QsMan from 'qsman';
 
 var url = new QsMan('https://domain.com?foo=bar').append({
     a: 1,

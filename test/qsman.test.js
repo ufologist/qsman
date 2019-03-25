@@ -85,6 +85,15 @@ describe('append', function() {
         expect(qsman.toString()).toBe('http://domain.com/?a=1&b=2&c=3&a=4&d=5');
     });
 
+    test('URL 有参数和 hash', function() {
+        var qsman = new QsMan('http://domain.com?a=1#/path/b?c=2');
+        qsman.append('b=2&c=3');
+        expect(qsman.toString()).toBe('http://domain.com?a=1&b=2&c=3#/path/b?c=2');
+
+        qsman.append('a=4');
+        expect(qsman.toString()).toBe('http://domain.com?a=1&b=2&c=3&a=4#/path/b?c=2');
+    });
+
     test('URL 有参数追加对象参数', function() {
         var qsman = new QsMan('http://domain.com/?a=1');
         qsman.append({
