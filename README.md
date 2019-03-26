@@ -36,7 +36,13 @@ console.log(url);
 
 ## APIDoc
 
-[ESDoc](https://doc.esdoc.org/github.com/ufologist/qsman/)
+* [ESDoc](https://doc.esdoc.org/github.com/ufologist/qsman/)
+* 兼容所有支持 [ES5](https://kangax.github.io/compat-table/es5/) 的浏览器
+
+  > * 提问: 如果想兼容 IE6 怎么办?
+  > * 回答
+  >   * 构建的时候安装和使用 [babel-plugin-transform-es3-memeber-and-property-regenerator](https://www.npmjs.com/package/babel-plugin-transform-es3-memeber-and-property-regenerator) 解决保留关键字的问题
+  >   * 在页面中使用 [es5-shim](https://github.com/es-shims/es5-shim)
 
 ## 为什么造轮子
 
