@@ -11,13 +11,13 @@ test('字符串参数', function() {
     var querystring = parseQueryString('&a=1&b&c=&d=2&e=中文&f=%E4%B8%AD%E6%96%87&g=100&g=101');
     expect(querystring).toEqual([{
         key: '',
-        value: undefined
+        value: ''
     }, {
         key: 'a',
         value: '1'
     }, {
         key: 'b',
-        value: undefined
+        value: ''
     }, {
         key: 'c',
         value: ''

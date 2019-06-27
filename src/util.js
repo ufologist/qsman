@@ -100,7 +100,7 @@ export function parseQueryString(queryString) {
             }
 
             key = key ? decodeURIComponent(key) : key;
-            value = typeof value !== 'undefined' ? decodeURIComponent(value) : value;
+            value = typeof value !== 'undefined' ? decodeURIComponent(value) : '';
 
             kvs.push({
                 key: key,

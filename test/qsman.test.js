@@ -43,16 +43,17 @@ describe('constructor', function() {
 
     test('URL 参数有空值', function() {
         var qsman = new QsMan('http://domain.com?a=1&b&c=2');
-        expect(qsman.toString()).toBe('http://domain.com?a=1&b&c=2');
-    });
+        expect(qsman.toString()).toBe('http://domain.com?a=1&b=&c=2');
 
-    test('URL 参数有明确的空值', function() {
         var qsman = new QsMan('http://domain.com?a=1&b=&c=2');
-        expect(qsman.toString(false)).toBe('http://domain.com?a=1&b=&c=2');
+        expect(qsman.toString()).toBe('http://domain.com?a=1&b=&c=2');
     });
 
-    test('排除 URL 没有明确空值的参数', function() {
+    test('排除 URL 空值的参数', function() {
         var qsman = new QsMan('http://domain.com?a=1&b&c=2');
+        expect(qsman.toString(false)).toBe('http://domain.com?a=1&c=2');
+
+        var qsman = new QsMan('http://domain.com?a=1&b=&c=2');
         expect(qsman.toString(false)).toBe('http://domain.com?a=1&c=2');
     });
 });
@@ -102,6 +103,18 @@ describe('append', function() {
             c: 3
         });
         expect(qsman.toString()).toBe('http://domain.com/?a=1&a=100&a=200&a=300&b=2&c=3');
+    });
+
+    test('追加空值', function() {
+        var qsman = new QsMan('http://domain.com');
+        qsman.append({
+            a: 1,
+            b: undefined,
+            c: null,
+            d: '4'
+        });
+        expect(qsman.toString()).toBe('http://domain.com?a=1&b=&c=&d=4');
+        expect(qsman.toString(false)).toBe('http://domain.com?a=1&d=4');
     });
 });
 

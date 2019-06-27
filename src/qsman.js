@@ -162,10 +162,10 @@ class QsMan {
     /**
      * 拼装 URL
      *
-     * @param {boolean} includeUndefinedValue 是否包含 undefined 值的参数, 默认为 true
+     * @param {boolean} [includeEmptyStringValue=true] 是否包含空字符串参数值的参数
      * @return {string}
      */
-    toString(includeUndefinedValue) {
+    toString(includeEmptyStringValue = true) {
         var url = '';
         var queryStringKvs = this._queryStringKvs;
 
@@ -174,10 +174,9 @@ class QsMan {
             return kv.key;
         });
 
-        var _includeUndefinedValue = typeof includeUndefinedValue === 'undefined' ? true : includeUndefinedValue;
-        if (!_includeUndefinedValue) {
+        if (!includeEmptyStringValue) {
             queryStringKvs = queryStringKvs.filter(function(kv) {
-                return typeof kv.value !== 'undefined';
+                return kv.value !== '';
             });
         }
 
