@@ -65,7 +65,7 @@ describe('append', function() {
             a: 1,
             b: 2
         });
-        expect(qsman.toString()).toBe('?a=1&b=2');
+        expect(qsman.toString()).toBe('a=1&b=2');
     });
 
     test('URL 上没有参数', function() {

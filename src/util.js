@@ -90,7 +90,7 @@ export function parseQueryString(queryString) {
             var kvp = kvps[i];
             var eqIndex = kvp.indexOf('=');
 
-            var key = undefined;
+            var key = '';
             var value = undefined;
             if (eqIndex !== -1) {
                 key = kvp.substring(0, eqIndex);
@@ -99,7 +99,7 @@ export function parseQueryString(queryString) {
                 key = kvp;
             }
 
-            key = key ? decodeURIComponent(key) : key;
+            key = decodeURIComponent(key);
             value = typeof value !== 'undefined' ? decodeURIComponent(value) : '';
 
             kvs.push({

@@ -169,9 +169,9 @@ class QsMan {
         var url = '';
         var queryStringKvs = this._queryStringKvs;
 
-        // 排除空值的 KEY
+        // 排除空字符串的 KEY
         queryStringKvs = queryStringKvs.filter(function(kv) {
-            return kv.key;
+            return kv.key !== '';
         });
 
         if (!includeEmptyStringValue) {
@@ -181,15 +181,15 @@ class QsMan {
         }
 
         var queryString = queryStringKvs.map(function(kv) {
-            var key = typeof kv.key !== 'undefined' ? encodeURIComponent(kv.key) : '';
-            var value = typeof kv.value !== 'undefined' ? encodeURIComponent(kv.value) : '';
-            return typeof kv.value !== 'undefined' ? (key + '=' + value) : key;
+            var key = encodeURIComponent(kv.key);
+            var value = encodeURIComponent(kv.value);
+            return key + '=' + value;
         }).join('&');
 
         // 重组 URL
         url = stripUrlQueryString(this._url);
         if (queryString) {
-            url = url + '?' + queryString;
+            url = url ? url + '?' + queryString : queryString;
         }
         var hash = getUrlHash(this._url);
         if (hash) {
