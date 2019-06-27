@@ -63,9 +63,10 @@ describe('append', function() {
         var qsman = new QsMan();
         qsman.append({
             a: 1,
-            b: 2
+            b: 2,
+            c: ' '
         });
-        expect(qsman.toString()).toBe('a=1&b=2');
+        expect(qsman.toString()).toBe('a=1&b=2&c=%20');
     });
 
     test('URL 上没有参数', function() {
