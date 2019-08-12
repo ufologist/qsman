@@ -29,7 +29,7 @@ class QsMan {
     append(queryString) {
         var queryStringKvs = parseQueryString(queryString);
         this._queryStringKvs = this._queryStringKvs.concat(queryStringKvs);
-        return this;
+        return new QsMan(this.toString());
     }
 
     /**
@@ -91,7 +91,7 @@ class QsMan {
         } else {
             this.append(kvMap);
         }
-        return this;
+        return new QsMan(this.toString());
     }
 
     /**
@@ -120,7 +120,7 @@ class QsMan {
             var kvIndex = queryStringKvs.indexOf(item);
             queryStringKvs.splice(kvIndex, 1);
         });
-        return this;
+        return new QsMan(this.toString());
     }
 
     /**
@@ -156,7 +156,7 @@ class QsMan {
 
             return compareResult;
         });
-        return this;
+        return new QsMan(this.toString());
     }
 
     /**
@@ -211,7 +211,7 @@ class QsMan {
             this.delete(queryStringKvs[i].key);
         }
         this.append(queryString);
-        return this;
+        return new QsMan(this.toString());
     }
 
     /**
