@@ -1,8 +1,10 @@
 {
   "name": "qsman",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "query string maintainer",
-  "main": "dist/qsman.js",
+  "main": "dist/qsman.common.js",
+  "module": "dist/qsman.esm.js",
+  "unpkg": "dist/qsman.js",
   "scripts": {
     "start": "rollup -c",
     "test": "jest"

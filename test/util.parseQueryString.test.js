@@ -42,52 +42,67 @@ test('字符串参数', function() {
 test('对象参数', function() {
     var querystring = parseQueryString({
         '': undefined,
-        a: 1,
-        b: undefined,
-        c: '',
-        d: '2',
-        e: null,
-        f: parseInt('a'), // NaN
-        g: 1 / 0, // Infinity
-        h: '中文',
-        i: '%E4%B8%AD%E6%96%87',
-        j: [100, 101]
+
+        number: 1,
+        string: '2',
+        booleanTrue: true,
+        booleanFalse: false,
+        null: null,
+        undefined: undefined,
+        array: [100, 101],            // 支持数组
+        encode: '中文',         // 会做 URL 编码
+        decode: '%E7%BC%96%E7%A0%81', // 支持已经通过 URL 编码的字符串
+
+        emptyString: '',
+        nan: parseInt('a'), // NaN
+        infinity: 1 / 0, // Infinity
+
+        encodeError: '中文: 100%' // 非 URL 编码, 会导致 decodeURIComponent 报错: URI malformed
     });
     expect(querystring).toEqual([{
         key: '',
         value: ''
     }, {
-        key: 'a',
+        key: 'number',
         value: '1'
     }, {
-        key: 'b',
-        value: ''
-    }, {
-        key: 'c',
-        value: ''
-    }, {
-        key: 'd',
+        key: 'string',
         value: '2'
     }, {
-        key: 'e',
+        key: 'booleanTrue',
+        value: 'true'
+    }, {
+        key: 'booleanFalse',
+        value: 'false'
+    }, {
+        key: 'null',
         value: ''
     }, {
-        key: 'f',
+        key: 'undefined',
         value: ''
     }, {
-        key: 'g',
-        value: ''
-    }, {
-        key: 'h',
-        value: '中文'
-    }, {
-        key: 'i',
-        value: '中文'
-    }, {
-        key: 'j',
+        key: 'array',
         value: '100'
     }, {
-        key: 'j',
+        key: 'array',
         value: '101'
+    }, {
+        key: 'encode',
+        value: '中文'
+    }, {
+        key: 'decode',
+        value: '编码'
+    }, {
+        key: 'emptyString',
+        value: ''
+    }, {
+        key: 'nan',
+        value: ''
+    }, {
+        key: 'infinity',
+        value: ''
+    }, {
+        key: 'encodeError',
+        value: '中文: 100%'
     }]);
 });

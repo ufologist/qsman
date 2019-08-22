@@ -5,24 +5,43 @@ import {
     uglify
 } from 'rollup-plugin-uglify';
 
-var plugins = [
-    // nodeResolve({
-    //     jsnext: true,
-    //     main: true
-    // }),
-    // commonjs(),
-    babel({
-        exclude: 'node_modules/**'
-    }),
-    uglify()
-];
+var input = 'src/qsman.js';
+var babelPlugin = babel({
+    exclude: 'node_modules/**'
+});
 
 export default [{
-    input: 'src/qsman.js',
+    input: input,
     output: {
         file: 'dist/qsman.js',
         format: 'umd',
         name: 'QsMan'
     },
-    plugins: plugins
+    plugins: [
+        // nodeResolve({
+        //     jsnext: true,
+        //     main: true
+        // }),
+        // commonjs(),
+        babelPlugin,
+        uglify()
+    ]
+}, {
+    input: input,
+    output: {
+        file: 'dist/qsman.common.js',
+        format: 'cjs'
+    },
+    plugins: [
+        babelPlugin
+    ]
+}, {
+    input: input,
+    output: {
+        file: 'dist/qsman.esm.js',
+        format: 'esm'
+    },
+    plugins: [
+        babelPlugin
+    ]
 }];

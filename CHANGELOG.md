@@ -1,5 +1,9 @@
 # CHANGELOG
 
+* v0.0.4 2019-8-22
+
+  * fix: 当 `append` 的值中有类似 `100%` 这样带百分号的字符串时, 在 `decodeURIComponent` 时会报错, 因为这个不是 URL 编码, 修复逻辑为 `try/catch decodeURIComponent` 操作, 报错时保留原始值
+
 * v0.0.3 2019-6-27
 
   * 解析 querystring 时将空值解析为空字符串

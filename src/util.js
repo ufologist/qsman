@@ -99,8 +99,21 @@ export function parseQueryString(queryString) {
                 key = kvp;
             }
 
-            key = decodeURIComponent(key);
-            value = typeof value !== 'undefined' ? decodeURIComponent(value) : '';
+            try {
+                key = decodeURIComponent(key);
+            } catch (error) {
+                console.warn('decodeURIComponent key error, remain key', key, error);
+            }
+
+            if (typeof value !== 'undefined') {
+                try {
+                    value = decodeURIComponent(value);
+                } catch (error) {
+                    console.warn('decodeURIComponent value error, remain value', value, error);
+                }
+            } else {
+                value = '';
+            }
 
             kvs.push({
                 key: key,
@@ -110,20 +123,41 @@ export function parseQueryString(queryString) {
     } else { // 解析对象类型的 querystring
         for (key in queryString) {
             if (Object.prototype.hasOwnProperty.call(queryString, key)) {
+                var _key = key;
+                try {
+                    _key = decodeURIComponent(_key);
+                } catch (error) {
+                    console.warn('decodeURIComponent key error, remain key', _key, error);
+                }
+
                 // XXX 不解析嵌套对象
-                value = queryString[key];
+                var value = queryString[key];
 
                 if (Object.prototype.toString.call(value) === '[object Array]') {
                     value.forEach(function(item) {
+                        var _value = stringifyObjectValue(item);
+                        try {
+                            _value = decodeURIComponent(_value);
+                        } catch (error) {
+                            console.warn('decodeURIComponent value error, remain value', _value, error);
+                        }
+
                         kvs.push({
-                            key: decodeURIComponent(key),
-                            value: decodeURIComponent(stringifyObjectValue(item))
+                            key: _key,
+                            value: _value
                         });
                     });
                 } else {
+                    value = stringifyObjectValue(value);
+                    try {
+                        value = decodeURIComponent(value);
+                    } catch (error) {
+                        console.warn('decodeURIComponent value error, remain value', value, error);
+                    }
+
                     kvs.push({
-                        key: decodeURIComponent(key),
-                        value: decodeURIComponent(stringifyObjectValue(value))
+                        key: _key,
+                        value: value
                     });
                 }
             }

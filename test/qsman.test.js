@@ -97,13 +97,19 @@ describe('append', function() {
     });
 
     test('URL 有参数追加对象参数', function() {
-        var qsman = new QsMan('http://domain.com/?a=1');
+        var qsman = new QsMan('http://domain.com/?number=1000');
         qsman.append({
-            a: [100, 200, 300],
-            b: 2,
-            c: 3
+            number: 1,
+            string: '2',
+            booleanTrue: true,
+            booleanFalse: false,
+            null: null,
+            undefined: undefined,
+            array: [100, 101],           // 支持数组
+            encode: '中文: 100%',        // 会做 URL 编码
+            decode: '%E7%BC%96%E7%A0%81' // 支持已经通过 URL 编码的字符串
         });
-        expect(qsman.toString()).toBe('http://domain.com/?a=1&a=100&a=200&a=300&b=2&c=3');
+        expect(qsman.toString()).toBe('http://domain.com/?number=1000&number=1&string=2&booleanTrue=true&booleanFalse=false&null=&undefined=&array=100&array=101&encode=%E4%B8%AD%E6%96%87%3A%20100%25&decode=%E7%BC%96%E7%A0%81');
     });
 
     test('追加空值', function() {
