@@ -24,7 +24,15 @@
 ```javascript
 import QsMan from 'qsman';
 
-var url = new QsMan('https://domain.com?number=1000').append({
+var qsman = new QsMan('https://domain.com?number=1000');
+
+// 获取对象格式的 URL 参数
+var urlParams = qsman.getObject();
+// {number: "1000"}
+console.log(urlParams);
+
+// 追加 URL 参数
+qsman.append({
     number: 1,
     string: '2',
     booleanTrue: true,
@@ -33,9 +41,11 @@ var url = new QsMan('https://domain.com?number=1000').append({
     undefined: undefined,
     array: [100, 101],            // 支持数组
     encode: '中文: 100%',         // 会做 URL 编码
-    decode: '%E7%BC%96%E7%A0%81', // 支持已经通过 URL 编码的字符串
-}).toString();
+    decode: '%E7%BC%96%E7%A0%81'  // 支持已经通过 URL 编码的字符串
+});
 
+// 获取最终的 URL
+var url = qsman.toString();
 // https://domain.com?number=1000&number=1&string=2&booleanTrue=true&booleanFalse=false&null=&undefined=&array=100&array=101&encode=%E4%B8%AD%E6%96%87%3A%20100%25&decode=%E7%BC%96%E7%A0%81
 console.log(url);
 ```
